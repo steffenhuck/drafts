@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Steffen Huck — Current Drafts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;500&display=swap" rel="stylesheet">
+  <meta name="description" content="Current working papers and drafts by Steffen Huck." />
+  <style>
+    :root{
+      --bg: #FBFAF7;
+      --ink: #1f2428;
+      --card-bg: #F2EEE6;
+      --col-max: 640px;
+      --gutter: clamp(20px, 5vw, 64px);
+    }
+    *{ box-sizing: border-box; }
+    html, body{ height: 100%; }
+    body{
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Work Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .wrap{
+      width: min(var(--col-max), calc(100% - (2 * var(--gutter))));
+      margin: 0 auto;
+      padding: clamp(56px, 10vh, 96px) 0 72px;
+    }
+    .home{
+      display: inline-block;
+      font-size: 0.95rem;
+      font-weight: 300;
+      letter-spacing: 0.07em;
+      text-decoration: none;
+      color: var(--ink);
+    }
+    .home:hover{
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .idblock{
+      margin: 8px 0 0;
+      font-size: 0.95rem;
+      font-weight: 300;
+      line-height: 1.65;
+    }
+    .page-title{
+      margin: 56px 0 0;
+      font-size: 2rem;
+      font-weight: 500;
+      line-height: 1.3;
+    }
+    .drafts-list{
+      margin-top: 36px;
+    }
+    .draft-entry{
+      margin-top: 40px;
+    }
+    .draft-entry:first-child{
+      margin-top: 0;
+    }
+    .draft-title{
+      display: inline-block;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .draft-title:hover{
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .draft-abstract{
+      margin: 12px 0 0 24px;
+      padding: 16px 20px;
+      background: var(--card-bg);
+      border-radius: 10px;
+      box-shadow: 0 1px 3px rgba(31, 36, 40, 0.05);
+      font-size: 0.95rem;
+      font-weight: 300;
+      line-height: 1.65;
+    }
+    .links{
+      margin-top: 42px;
+      font-size: 1.05rem;
+      font-weight: 500;
+      line-height: 1.7;
+    }
+    .links a{
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .links a:hover{
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .pair{
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+    }
+    .sep{
+      padding: 0 18px;
+      font-weight: 500;
+    }
+    .section-gap{
+      margin-top: 24px;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="masthead">
+      <a class="home" href="../" aria-label="Back to homepage">steffen huck</a>
+      <p class="page-title">current drafts</p>
+    </header>
+    <section class="drafts-list">
+      <article class="draft-entry">
+        <a class="draft-title" href="satire.pdf">Satire in Science: Joke, Education, and Inquiry</a>
+        <p class="draft-abstract">Satire in science is usually seen as joke and sometimes as a vehicle for teaching. This note distinguishes three uses: joke, education, and inquiry. Inquiry comes in its own three forms: satire can estrange, it can construct mechanisms, and it can stress-test methods. Since satire resists definition, the note begins with the question of how it is recognised at all.</p>
+      </article>
+      <article class="draft-entry">
+        <a class="draft-title" href="jokes.pdf">Jokes and the Mechanics of Beliefs</a>
+        <p class="draft-abstract">I look at jokes as a transaction between two parties, a teller and a listener, in which the punchline performs an operation on the listener's beliefs. Leaning lightly on game theory, I argue that the majority of jokes fall into three different categories: (i) collapse of beliefs: a belief the listener has been led to hold shifts dramatically with the punchline; (ii) salience of beliefs: beliefs about different readings the listener held from the beginning become suddenly apparent; (iii) common knowledge of beliefs: privately held beliefs are revealed as shared. Some jokes are hybrids, drawing on more than one of these channels at once.</p>
+      </article>
+      <article class="draft-entry">
+        <a class="draft-title" href="gaza.pdf">Excessive Harm</a>
+        <p class="draft-abstract">A father punishes a son who has done a misdeed; a mother can sanction the father to protect him. Both sides harbour private information: the father may be just or harsh, the mother's resolve to carry out sanctions strong or weak. I characterise when protection fails. Any protection requires early sanctions. Yet, sanctioning can fail in two ways: through silence, when sanctions cost more than they spare, and through unmasking, when the harsh father screens the mothers and only the resolute mother can protect her son. The model speaks to international law, where punisher and protector are states.</p>
+      </article>
+    </section>
+    <!-- drafts list goes here -->
+  </main>
+  <script data-goatcounter="https://steffenhuck.goatcounter.com/count"
+        async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>
