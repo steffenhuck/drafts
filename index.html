@@ -88,41 +88,11 @@
       font-weight: 500;
       line-height: 1.3;
       color: #a8566f;
-      cursor: pointer;
-      position: relative;
-    }
-    .pills{
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 12px 0 0;
-    }
-    .pill{
-      display: inline-block;
-      margin: 0;
-      padding: 2px 11px 3px;
-      border: 1px solid #a8566f;
-      border-radius: 999px;
-      background: none;
-      font: inherit;
-      font-size: 0.85rem;
-      font-weight: 500;
-      line-height: 1.4;
-      color: #a8566f;
       text-decoration: none;
       cursor: pointer;
       position: relative;
-      transition: background-color 0.1s ease, color 0.1s ease;
     }
-    .pill:hover,
-    .pill:focus-visible,
-    .pill[aria-expanded="true"]{
-      background: #a8566f;
-      color: var(--bg);
-      text-decoration: none;
-    }
-    .listen::after,
-    .pill::after{
+    .listen::after{
       content: attr(data-tip);
       position: absolute;
       left: calc(100% + 10px);
@@ -142,20 +112,23 @@
       z-index: 1;
     }
     .listen:hover::after,
-    .listen:focus-visible::after,
-    .pill:hover::after,
-    .pill:focus-visible::after{
+    .listen:focus-visible::after{
       opacity: 1;
     }
-    .pill.listen:hover,
-    .pill.listen:focus-visible,
-    .pill.listen[aria-expanded="true"]{
-      text-decoration: none;
+    .extras{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 22px;
+      margin: 6px 0 0;
     }
-    .pill::after{
+    .extras .listen{
+      display: inline-block;
+      margin: 0;
+    }
+    .extras .listen::after{
       left: 50%;
       top: auto;
-      bottom: calc(100% + 7px);
+      bottom: calc(100% + 6px);
       transform: translateX(-50%);
     }
     .listen:hover,
@@ -224,10 +197,10 @@
         <a class="draft-title" href="closed_codes.pdf" data-goatcounter-click="closed-codes-pdf">Closed Codes: Three Paths to the Downfall of an Elite</a>
         <div class="draft-abstract">
         <p>An elite controls a screen and may show its own code or a common code. Part of the audience cannot read the elite's own code. A citizen who misses an episode asks her neighbour whether she got it, and a season in which nobody around her got it leaves a grievance with the elite. The elite may get increasingly infatuated with its own code and rely more heavily on it over time. I examine two channels through which those not familiar with the elite's code may acquire it: leakage through acquaintances and public schooling. I characterise the elite's season-by-season choice of what to show on the screen and the three routes that lead to its downfall. Learning is not monotone for the elite. In the limit of slow learning a little is never better than none, and it can be fatal where none is not.</p>
-        <div class="pills">
-          <button class="listen pill" type="button" data-tip="A NotebookLM Podcast" aria-label="audio: A NotebookLM Podcast" aria-expanded="false" aria-controls="closed-codes-audio">audio</button>
-          <button class="listen pill" type="button" data-tip="A NotebookLM Podcast, auf Deutsch" aria-label="german audio: A NotebookLM Podcast, auf Deutsch" aria-expanded="false" aria-controls="closed-codes-de-audio">german audio</button>
-          <a class="pill" href="https://steffenhuck.github.io/the-screen/" data-tip="The Screen — play the model" data-goatcounter-click="closed-codes-game">game</a>
+        <div class="extras">
+          <button class="listen" type="button" data-tip="A NotebookLM Podcast" aria-label="audio: A NotebookLM Podcast" aria-expanded="false" aria-controls="closed-codes-audio">audio</button>
+          <button class="listen" type="button" data-tip="A NotebookLM Podcast, auf Deutsch" aria-label="german audio: A NotebookLM Podcast, auf Deutsch" aria-expanded="false" aria-controls="closed-codes-de-audio">german audio</button>
+          <a class="listen" href="https://steffenhuck.github.io/the-screen/" data-tip="The Screen — play the model" data-goatcounter-click="closed-codes-game">game</a>
         </div>
         <audio class="draft-player" id="closed-codes-audio" src="closed_codes.m4a" controls preload="none" hidden></audio>
         <audio class="draft-player" id="closed-codes-de-audio" src="closed_codes_german.m4a" controls preload="none" hidden></audio>
