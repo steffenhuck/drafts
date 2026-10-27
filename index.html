@@ -187,6 +187,25 @@
       padding: 0 18px;
       font-weight: 500;
     }
+    .lightbox{
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(31, 36, 40, 0.82);
+      cursor: pointer;
+    }
+    .lightbox[hidden]{ display: none; }
+    .lightbox img{
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 10px;
+      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.35);
+      background: #fff;
+    }
     .section-gap{
       margin-top: 24px;
     }
@@ -208,7 +227,7 @@
           <button class="listen" type="button" data-tip="A NotebookLM Podcast" aria-label="audio: A NotebookLM Podcast" aria-expanded="false" aria-controls="closed-codes-audio">audio</button>
           <button class="listen" type="button" data-tip="A NotebookLM Podcast, auf Deutsch" aria-label="german audio: A NotebookLM Podcast, auf Deutsch" aria-expanded="false" aria-controls="closed-codes-de-audio">german audio</button>
           <a class="extra" href="https://steffenhuck.github.io/the-screen/" data-tip="The Screen — play the model" data-goatcounter-click="closed-codes-game">game</a>
-          <a class="extra" href="closed_codes.png" data-tip="The fable, in five panels" data-goatcounter-click="closed-codes-cartoon">cartoon</a>
+          <a class="extra cartoon" href="closed_codes.png" data-tip="The fable, in five panels" data-paper="closed-codes">cartoon</a>
         </div>
         <audio class="draft-player" id="closed-codes-audio" src="closed_codes.m4a" controls preload="none" hidden></audio>
         <audio class="draft-player" id="closed-codes-de-audio" src="closed_codes_german.m4a" controls preload="none" hidden></audio>
@@ -226,7 +245,7 @@ the timing of crackdowns depends on an opposition’s innate strength and on the
 surveillance capacity, and characterises three archetypal wave configurations.</p>
         <div class="extras">
           <button class="listen" type="button" data-tip="A NotebookLM Podcast" aria-label="audio: A NotebookLM Podcast" aria-expanded="false" aria-controls="lulls-audio">audio</button>
-          <a class="extra" href="lulls.png" data-tip="Waves, in five panels" data-goatcounter-click="lulls-cartoon">cartoon</a>
+          <a class="extra cartoon" href="lulls.png" data-tip="Waves, in five panels" data-paper="lulls">cartoon</a>
         </div>
         <audio class="draft-player" id="lulls-audio" src="lulls.m4a" controls preload="none" hidden></audio>
         </div>
@@ -260,6 +279,9 @@ surveillance capacity, and characterises three archetypal wave configurations.</
     </section>
     <!-- drafts list goes here -->
   </main>
+  <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Cartoon">
+    <img id="lightbox-img" alt="" />
+  </div>
   <script>
     // Send a GoatCounter event (silently skipped if GoatCounter is blocked).
     function track(name) {
@@ -317,6 +339,29 @@ surveillance capacity, and characterises three archetypal wave configurations.</
           if (playing && playing.catch) playing.catch(function () {});
         }
       });
+    });
+
+    // "cartoon" shows the strip over the page; any click (or Escape) closes it.
+    var box = document.getElementById('lightbox');
+    var boxImg = document.getElementById('lightbox-img');
+    function closeBox() {
+      box.hidden = true;
+      boxImg.removeAttribute('src');
+      document.body.style.overflow = '';
+    }
+    document.querySelectorAll('.cartoon').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        boxImg.src = a.getAttribute('href');
+        boxImg.alt = a.getAttribute('data-tip') || 'cartoon';
+        box.hidden = false;
+        document.body.style.overflow = 'hidden';
+        track(a.getAttribute('data-paper') + '-cartoon');
+      });
+    });
+    box.addEventListener('click', closeBox);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !box.hidden) closeBox();
     });
   </script>
   <script data-goatcounter="https://steffenhuck.goatcounter.com/count"
