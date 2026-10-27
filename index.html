@@ -78,7 +78,7 @@
     .draft-abstract p{
       margin: 0;
     }
-    .listen{
+    .listen, .extra{
       display: block;
       margin: 6px 0 0;
       padding: 0;
@@ -92,7 +92,7 @@
       cursor: pointer;
       position: relative;
     }
-    .listen::after{
+    .listen::after, .extra::after{
       content: attr(data-tip);
       position: absolute;
       left: calc(100% + 10px);
@@ -112,8 +112,15 @@
       z-index: 1;
     }
     .listen:hover::after,
-    .listen:focus-visible::after{
+    .listen:focus-visible::after,
+    .extra:hover::after,
+    .extra:focus-visible::after{
       opacity: 1;
+    }
+    .extra:hover,
+    .extra:focus-visible{
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
     .extras{
       display: flex;
@@ -121,11 +128,11 @@
       gap: 0 22px;
       margin: 6px 0 0;
     }
-    .extras .listen{
+    .extras .listen, .extras .extra{
       display: inline-block;
       margin: 0;
     }
-    .extras .listen::after{
+    .extras .listen::after, .extras .extra::after{
       left: 50%;
       top: auto;
       bottom: calc(100% + 6px);
@@ -200,7 +207,7 @@
         <div class="extras">
           <button class="listen" type="button" data-tip="A NotebookLM Podcast" aria-label="audio: A NotebookLM Podcast" aria-expanded="false" aria-controls="closed-codes-audio">audio</button>
           <button class="listen" type="button" data-tip="A NotebookLM Podcast, auf Deutsch" aria-label="german audio: A NotebookLM Podcast, auf Deutsch" aria-expanded="false" aria-controls="closed-codes-de-audio">german audio</button>
-          <a class="listen" href="https://steffenhuck.github.io/the-screen/" data-tip="The Screen — play the model" data-goatcounter-click="closed-codes-game">game</a>
+          <a class="extra" href="https://steffenhuck.github.io/the-screen/" data-tip="The Screen — play the model" data-goatcounter-click="closed-codes-game">game</a>
         </div>
         <audio class="draft-player" id="closed-codes-audio" src="closed_codes.m4a" controls preload="none" hidden></audio>
         <audio class="draft-player" id="closed-codes-de-audio" src="closed_codes_german.m4a" controls preload="none" hidden></audio>
@@ -262,6 +269,7 @@ surveillance capacity, and characterises three archetypal wave configurations.</
     // "audio" toggles the inline player; opening one closes any other.
     document.querySelectorAll('.listen').forEach(function (btn) {
       var player = document.getElementById(btn.getAttribute('aria-controls'));
+      if (!player) return;
       var paper = player.id.replace('-audio', '');
 
       // Count real listening time (not position, so skipping ahead doesn't count).
@@ -292,6 +300,7 @@ surveillance capacity, and characterises three archetypal wave configurations.</
         var opening = player.hidden;
         document.querySelectorAll('.listen').forEach(function (other) {
           var p = document.getElementById(other.getAttribute('aria-controls'));
+          if (!p) return;
           p.pause();
           p.hidden = true;
           other.setAttribute('aria-expanded', 'false');
