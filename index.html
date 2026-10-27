@@ -185,7 +185,7 @@ survive can mount costly crackdowns accelerating the demolition of its oppositio
 structural consolidation erodes the opposition also during lulls. The paper shows how
 the timing of crackdowns depends on an opposition’s innate strength and on the regime’s
 surveillance capacity, and characterises three archetypal wave configurations.</p>
-        <button class="listen" type="button" data-tip="A NotebookLM Podcast" aria-label="audio: A NotebookLM Podcast" aria-expanded="false" aria-controls="lulls-audio" data-goatcounter-click="lulls-podcast">audio</button>
+        <button class="listen" type="button" data-tip="A NotebookLM Podcast" aria-label="audio: A NotebookLM Podcast" aria-expanded="false" aria-controls="lulls-audio">audio</button>
         <audio class="draft-player" id="lulls-audio" src="lulls.m4a" controls preload="none" hidden></audio>
         </div>
       </article>
@@ -194,26 +194,59 @@ surveillance capacity, and characterises three archetypal wave configurations.</
         <a class="draft-title" href="gaza.pdf" data-goatcounter-click="gaza-pdf">Excessive Harm</a>
         <div class="draft-abstract">
         <p>A father punishes a son who has done a misdeed; a mother can sanction the father to protect him. Both sides harbour private information: the father may be just or harsh, the mother's resolve to carry out sanctions strong or weak. I characterise when protection fails. Any protection requires early sanctions. Yet, sanctioning can fail in two ways: through silence, when sanctions cost more than they spare, and through unmasking, when the harsh father screens the mothers and only the resolute mother can protect her son. The model speaks to international law, where punisher and protector are states.</p>
-        <button class="listen" type="button" data-tip="A NotebookLM Podcast" aria-label="audio: A NotebookLM Podcast" aria-expanded="false" aria-controls="gaza-audio" data-goatcounter-click="gaza-podcast">audio</button>
+        <button class="listen" type="button" data-tip="A NotebookLM Podcast" aria-label="audio: A NotebookLM Podcast" aria-expanded="false" aria-controls="gaza-audio">audio</button>
         <audio class="draft-player" id="gaza-audio" src="gaza.m4a" controls preload="none" hidden></audio>
         </div>
       </article>
       
       <article class="draft-entry">
         <a class="draft-title" href="satire.pdf" data-goatcounter-click="satire-pdf">Satire in Science: Joke, Education, and Inquiry</a>
-        <p class="draft-abstract">Satire in science is usually seen as joke and sometimes as a vehicle for teaching. This note distinguishes three uses: joke, education, and inquiry. Inquiry comes in its own three forms: satire can estrange, it can construct mechanisms, and it can stress-test methods. Since satire resists definition, the note begins with the question of how it is recognised at all.</p>
+        <div class="draft-abstract">
+        <p>Satire in science is usually seen as joke and sometimes as a vehicle for teaching. This note distinguishes three uses: joke, education, and inquiry. Inquiry comes in its own three forms: satire can estrange, it can construct mechanisms, and it can stress-test methods. Since satire resists definition, the note begins with the question of how it is recognised at all.</p>
+        <button class="listen" type="button" data-tip="A NotebookLM Podcast" aria-label="audio: A NotebookLM Podcast" aria-expanded="false" aria-controls="satire-audio">audio</button>
+        <audio class="draft-player" id="satire-audio" src="satire.m4a" controls preload="none" hidden></audio>
+        </div>
       </article>
       <article class="draft-entry">
         <a class="draft-title" href="jokes.pdf" data-goatcounter-click="jokes-pdf">Jokes and the Mechanics of Beliefs</a>
-        <p class="draft-abstract">I look at jokes as a transaction between two parties, a teller and a listener, in which the punchline performs an operation on the listener's beliefs. Leaning lightly on game theory, I argue that the majority of jokes fall into three different categories: (i) collapse of beliefs: a belief the listener has been led to hold shifts dramatically with the punchline; (ii) salience of beliefs: beliefs about different readings the listener held from the beginning become suddenly apparent; (iii) common knowledge of beliefs: privately held beliefs are revealed as shared. Some jokes are hybrids, drawing on more than one of these channels at once.</p>
+        <div class="draft-abstract">
+        <p>I look at jokes as a transaction between two parties, a teller and a listener, in which the punchline performs an operation on the listener's beliefs. Leaning lightly on game theory, I argue that the majority of jokes fall into three different categories: (i) collapse of beliefs: a belief the listener has been led to hold shifts dramatically with the punchline; (ii) salience of beliefs: beliefs about different readings the listener held from the beginning become suddenly apparent; (iii) common knowledge of beliefs: privately held beliefs are revealed as shared. Some jokes are hybrids, drawing on more than one of these channels at once.</p>
+        <button class="listen" type="button" data-tip="A NotebookLM Podcast" aria-label="audio: A NotebookLM Podcast" aria-expanded="false" aria-controls="jokes-audio">audio</button>
+        <audio class="draft-player" id="jokes-audio" src="jokes.m4a" controls preload="none" hidden></audio>
+        </div>
       </article>
     </section>
     <!-- drafts list goes here -->
   </main>
   <script>
-    // Mic toggles the inline player; opening one closes any other.
+    // Send a GoatCounter event (silently skipped if GoatCounter is blocked).
+    function track(name) {
+      try {
+        if (window.goatcounter && window.goatcounter.count) {
+          window.goatcounter.count({ path: name, title: name, event: true });
+        }
+      } catch (e) {}
+    }
+
+    // "audio" toggles the inline player; opening one closes any other.
     document.querySelectorAll('.listen').forEach(function (btn) {
       var player = document.getElementById(btn.getAttribute('aria-controls'));
+      var paper = player.id.replace('-audio', '');
+
+      // Count real listening time (not position, so skipping ahead doesn't count).
+      var listened = 0, last = null, sent2 = false, sent10 = false;
+      player.addEventListener('timeupdate', function () {
+        var now = player.currentTime;
+        if (last !== null && !player.paused) {
+          var step = now - last;
+          if (step > 0 && step < 2) listened += step;
+        }
+        last = now;
+        if (!sent2 && listened >= 120) { sent2 = true; track(paper + '-listen-2min'); }
+        if (!sent10 && listened >= 600) { sent10 = true; track(paper + '-listen-10min'); }
+      });
+      player.addEventListener('seeking', function () { last = null; });
+
       // Start fetching the audio as soon as the reader shows interest.
       function warmUp() {
         if (player.preload === 'none') {
@@ -235,6 +268,7 @@ surveillance capacity, and characterises three archetypal wave configurations.</
         if (opening) {
           player.hidden = false;
           btn.setAttribute('aria-expanded', 'true');
+          track(paper + '-podcast');
           var playing = player.play();
           if (playing && playing.catch) playing.catch(function () {});
         }
